@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>H'appi · Présentation Client</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<script src="config.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --primary:   #1a2744;
+  --secondary: #c8a84b;
+  --accent:    #e63946;
+  --dark:      #080d1a;
+  --card:      #111827;
+  --mid:       #0d1630;
+  --white:     #ffffff;
+  --muted:     rgba(255,255,255,.5);
+  --radius:    12px;
+}
+
+html, body {
+  height: 100%; width: 100%;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  background: var(--dark);
+  color: var(--white);
+}
+
+/* ── SLIDE ENGINE ── */
+.deck { width: 100vw; height: 100vh; position: relative; }
+
+.slide {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  opacity: 0; pointer-events: none;
+  transition: opacity .45s cubic-bezier(.22,1,.36,1);
+  overflow: hidden;
+}
+.slide.active { opacity: 1; pointer-events: all; }
+
+/* ── PROGRESS BAR ── */
+#progress-bar {
+  position: fixed; top: 0; left: 0; height: 3px;
+  background: var(--secondary); z-index: 9999;
+  transition: width .4s ease;
+}
+
+/* ── NAV ── */
+.nav {
+  position: fixed; bottom: 34px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; align-items: center; gap: 14px;
+  background: rgba(0,0,0,.75); backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 40px; padding: 8px 22px;
+  z-index: 9999;
+}
+.nav button {
+  background: none; border: none; color: #fff;
+  font-size: 18px; cursor: pointer; padding: 4px 8px;
+  border-radius: 6px; transition: background .15s;
+}
+.nav button:hover { background: rgba(255,255,255,.12); }
+.nav .dots { display: flex; gap: 5px; }
+.nav .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,.25); cursor: pointer;
+  transition: all .2s;
+}
+.nav .dot.on { background: var(--secondary); transform: scale(1.4); }
+.nav .count { color: rgba(255,255,255,.5); font-size: 12px; min-width: 44px; text-align: center; }
+
+/* ── SHARED HEADER ── */
+.s-hdr {
+  display: flex; align-items: center; gap: 16px;
+  padding: 28px 48px 20px;
+  flex-shrink: 0;
+}
+.s-hdr .bar {
+  width: 7px; height: 36px; flex-shrink: 0;
+  background: var(--accent); border-radius: 3px;
+}
+.s-hdr h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px; letter-spacing: 2px;
+  color: var(--white); flex: 1;
+}
+.s-hdr .slide-n {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 72px; color: rgba(255,255,255,.06);
+  line-height: 1; user-select: none;
+}
+
+/* ── SLIDE 1 — COVER ── */
+#s1 { background: var(--dark); flex-direction: row; }
+#s1 .left {
+  flex: 1; display: flex; flex-direction: column;
+  padding: 48px 52px; position: relative;
+}
+#s1 .right {
+  width: 300px; background: var(--mid);
+  border-left: 1px solid rgba(255,255,255,.08);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 36px 28px; gap: 18px;
+}
+#s1 .topline { height: 2px; background: var(--secondary); margin-bottom: 28px; border-radius: 1px; }
+#s1 .brand { font-family: 'Bebas Neue', sans-serif; font-size: 58px; color: var(--secondary); letter-spacing: 4px; line-height: 1; }
+#s1 .tagline { color: var(--muted); font-size: 13px; font-style: italic; margin: 6px 0 28px; }
+#s1 h1 { font-size: 28px; font-weight: 800; color: #fff; line-height: 1.25; margin-bottom: 24px; }
+#s1 h1 em { color: var(--accent); font-style: normal; }
+#s1 .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+#s1 .chip {
+  padding: 6px 14px; border-radius: 20px;
+  font-size: 11px; font-weight: 700; letter-spacing: .5px;
+  border: 1px solid rgba(255,255,255,.15);
+  background: rgba(255,255,255,.06); color: #fff;
+}
+#s1 .meta { color: rgba(255,255,255,.45); font-size: 12px; margin-top: auto; line-height: 2; }
+#s1 .meta strong { color: rgba(255,255,255,.75); }
+#s1 .fbar {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 36px; background: var(--primary);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; color: rgba(255,255,255,.7); letter-spacing: 2px;
+}
+#s1 .initials {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 72px; color: var(--white);
+  line-height: 1; letter-spacing: -2px;
+}
+#s1 .cl-name { font-weight: 800; font-size: 15px; color: #fff; text-align: center; }
+#s1 .cl-tag  { font-size: 11px; color: var(--muted); text-align: center; margin-top: 4px; }
+#s1 .divider { width: 100%; height: 1px; background: rgba(255,255,255,.08); }
+
+/* ── SLIDE 2 — PROBLÈME ── */
+#s2 { background: var(--dark); }
+#s2 .body {
+  display: flex; gap: 20px;
+  padding: 0 48px 32px; flex: 1;
+}
+.pb-card {
+  flex: 1; background: var(--card);
+  border-radius: var(--radius);
+  border-top: 4px solid var(--accent);
+  padding: 24px; display: flex; flex-direction: column; gap: 12px;
+}
+.pb-card .ico { font-size: 28px; }
+.pb-card h4 { font-size: 14px; font-weight: 700; color: #fff; }
+.pb-card p  { font-size: 12px; color: var(--muted); line-height: 1.7; flex: 1; }
+
+/* ── SLIDE 3 — SOLUTION ── */
+#s3 { background: var(--dark); }
+#s3 .body { display: flex; gap: 20px; padding: 0 48px 32px; flex: 1; }
+.ft-card {
+  flex: 1; background: var(--card);
+  border-radius: var(--radius);
+  border-left: 4px solid var(--secondary);
+  padding: 22px; display: flex; flex-direction: column; gap: 10px;
+}
+.ft-card .ico { font-size: 26px; }
+.ft-card h4 { font-size: 14px; font-weight: 700; color: #fff; }
+.ft-card p  { font-size: 12px; color: var(--muted); line-height: 1.7; flex: 1; }
+.ft-card .tag {
+  display: inline-block; padding: 3px 10px;
+  border-radius: 20px; font-size: 9px; font-weight: 700;
+  background: rgba(0,184,124,.12); color: #10b981;
+  border: 1px solid rgba(0,184,124,.3);
+  width: fit-content;
+}
+.ft-card .tag.ph2 {
+  background: rgba(200,168,75,.1); color: var(--secondary);
+  border-color: rgba(200,168,75,.3);
+}
+
+/* ── SLIDE 4 — DEMO ── */
+#s4 { background: var(--dark); }
+#s4 .body {
+  display: flex; gap: 24px;
+  padding: 0 48px 24px; flex: 1; min-height: 0;
+}
+#s4 .demo-wrap {
+  flex: 1; display: flex; flex-direction: column;
+  background: var(--card); border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,.08); overflow: hidden;
+}
+.demo-hdr {
+  background: var(--primary); padding: 10px 16px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0;
+}
+.demo-hdr .bot-nm { font-size: 11px; font-weight: 700; color: #fff; }
+.demo-hdr .live-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #10b981; box-shadow: 0 0 6px #10b981;
+  animation: pulse 1.8s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+.chat-area {
+  flex: 1; overflow-y: auto; padding: 16px;
+  display: flex; flex-direction: column; gap: 10px;
+  min-height: 0;
+}
+.chat-area::-webkit-scrollbar { width: 4px; }
+.chat-area::-webkit-scrollbar-thumb { background: rgba(255,255,255,.15); border-radius: 4px; }
+
+.msg { display: flex; gap: 8px; align-items: flex-end; max-width: 82%; }
+.msg.bot  { align-self: flex-start; }
+.msg.user { align-self: flex-end; flex-direction: row-reverse; }
+.msg .av {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+}
+.msg.bot  .av { background: var(--primary); }
+.msg.user .av { background: var(--accent); }
+.msg .bubble {
+  padding: 9px 13px; border-radius: 12px;
+  font-size: 12px; line-height: 1.6;
+}
+.msg.bot  .bubble { background: rgba(255,255,255,.08); color: #fff; border-radius: 2px 12px 12px 12px; }
+.msg.user .bubble { background: var(--primary); color: #fff; border-radius: 12px 2px 12px 12px; }
+
+.opts-wrap { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 16px 12px; flex-shrink: 0; }
+.opt-btn {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.15);
+  color: #fff; font-size: 11px; padding: 6px 14px;
+  border-radius: 20px; cursor: pointer;
+  transition: background .15s, border-color .15s;
+  font-family: 'Inter', sans-serif;
+}
+.opt-btn:hover { background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.3); }
+
+.demo-input {
+  display: flex; gap: 8px; align-items: center;
+  padding: 10px 14px; border-top: 1px solid rgba(255,255,255,.08);
+  flex-shrink: 0;
+}
+.demo-input input {
+  flex: 1; background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.1); border-radius: 20px;
+  padding: 8px 14px; color: #fff; font-size: 11px;
+  font-family: 'Inter', sans-serif; outline: none;
+  transition: border-color .15s;
+}
+.demo-input input::placeholder { color: rgba(255,255,255,.3); }
+.demo-input input:focus { border-color: rgba(255,255,255,.3); }
+.demo-input button {
+  background: var(--primary); border: none; color: #fff;
+  width: 34px; height: 34px; border-radius: 50%; cursor: pointer;
+  font-size: 14px; transition: background .15s;
+}
+.demo-input button:hover { background: var(--accent); }
+
+/* info panel */
+#s4 .info-panel {
+  width: 260px; display: flex; flex-direction: column; gap: 14px;
+  flex-shrink: 0;
+}
+.info-card {
+  background: var(--card); border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,.08);
+  padding: 16px;
+}
+.info-card .ic-label {
+  font-size: 9px; font-weight: 800; letter-spacing: 2px;
+  color: var(--muted); text-transform: uppercase; margin-bottom: 10px;
+}
+.info-card ul { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.info-card li { font-size: 11px; color: rgba(255,255,255,.7); line-height: 1.5; display: flex; gap: 7px; }
+.info-card li::before { content: "›"; color: var(--secondary); font-weight: 700; flex-shrink: 0; }
+
+/* ── SLIDE 6 — CTA ── */
+#s6 { background: var(--dark); }
+#s6 .body {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  flex: 1; gap: 32px; padding: 0 48px 60px;
+  text-align: center;
+}
+#s6 h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 42px; letter-spacing: 3px; color: #fff;
+}
+#s6 h2 em { color: var(--secondary); font-style: normal; }
+#s6 .sub { font-size: 15px; color: var(--muted); max-width: 520px; line-height: 1.7; }
+#s6 .cta-chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+#s6 .cta-chip {
+  padding: 9px 18px; border-radius: 24px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.15);
+  font-size: 12px; font-weight: 600; color: #fff;
+}
+#s6 .contact-box {
+  background: var(--primary); border-radius: var(--radius);
+  padding: 24px 40px; display: flex; align-items: center; gap: 32px;
+}
+#s6 .contact-box .cn { font-size: 18px; font-weight: 800; color: #fff; }
+#s6 .contact-box .cr { font-size: 12px; color: rgba(255,255,255,.55); margin-top: 2px; }
+#s6 .contact-box .emails { font-size: 12px; color: var(--secondary); margin-top: 8px; line-height: 1.8; }
+#s6 .divv { width: 1px; height: 60px; background: rgba(255,255,255,.12); }
+#s6 .happi-brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px; color: var(--secondary); letter-spacing: 3px;
+}
+#s6 .happi-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+/* ── LANG TOGGLE ── */
+#lang-btn {
+  position: fixed; top: 16px; right: 20px;
+  background: rgba(0,0,0,.6); backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.15);
+  color: #fff; font-size: 12px; font-weight: 700;
+  padding: 6px 14px; border-radius: 20px;
+  cursor: pointer; z-index: 9999;
+  transition: background .15s;
+}
+#lang-btn:hover { background: rgba(255,255,255,.15); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .s-hdr { padding: 20px 20px 14px; }
+  .s-hdr h2 { font-size: 20px; }
+  #s1 .right { display: none; }
+  #s1 .left { padding: 28px 20px; }
+  #s2 .body, #s3 .body { flex-direction: column; padding: 0 20px 20px; }
+  #s4 .body { flex-direction: column; padding: 0 20px 20px; }
+  #s4 .info-panel { width: 100%; flex-direction: row; flex-wrap: wrap; }
+  #s6 .contact-box { flex-direction: column; gap: 12px; padding: 20px; }
+  #s6 .divv { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<button id="lang-btn" onclick="toggleLang()"></button>
+
+<div class="deck" id="deck">
+
+<!-- ══ SLIDE 1 — COVER ══ -->
+<div class="slide active" id="s1">
+  <div class="left">
+    <div class="topline"></div>
+    <div class="brand">H'APPI</div>
+    <div class="tagline" id="s1-tagline"></div>
+    <h1 id="s1-headline"></h1>
+    <div class="chips" id="s1-chips"></div>
+    <div class="meta" id="s1-meta"></div>
+    <div class="fbar" id="s1-fbar"></div>
+  </div>
+  <div class="right">
+    <div class="initials" id="s1-initials"></div>
+    <div class="divider"></div>
+    <div class="cl-name" id="s1-clname"></div>
+    <div class="cl-tag"  id="s1-cltag"></div>
+    <div class="divider"></div>
+    <div style="text-align:center;">
+      <div style="font-size:10px;font-weight:800;letter-spacing:2px;color:rgba(255,255,255,.35);margin-bottom:8px;">PRÉSENTÉ PAR</div>
+      <div style="font-size:13px;font-weight:700;color:#fff;" id="s1-presenter"></div>
+      <div style="font-size:11px;color:rgba(255,255,255,.45);margin-top:3px;" id="s1-role"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 2 — PROBLÈME ══ -->
+<div class="slide" id="s2">
+  <div class="s-hdr">
+    <div class="bar"></div>
+    <h2 id="s2-title"></h2>
+    <div class="slide-n">02</div>
+  </div>
+  <div class="body" id="s2-body"></div>
+</div>
+
+<!-- ══ SLIDE 3 — SOLUTION ══ -->
+<div class="slide" id="s3">
+  <div class="s-hdr">
+    <div class="bar"></div>
+    <h2 id="s3-title"></h2>
+    <div class="slide-n">03</div>
+  </div>
+  <div class="body" id="s3-body"></div>
+</div>
+
+<!-- ══ SLIDE 4 — DÉMO ══ -->
+<div class="slide" id="s4">
+  <div class="s-hdr">
+    <div class="bar"></div>
+    <h2 id="s4-title"></h2>
+    <div class="slide-n">04</div>
+  </div>
+  <div class="body">
+    <div class="demo-wrap">
+      <div class="demo-hdr">
+        <span class="bot-nm" id="demo-name"></span>
+        <span class="live-dot" title="En ligne"></span>
+      </div>
+      <div class="chat-area" id="chat"></div>
+      <div class="opts-wrap" id="opts"></div>
+      <div class="demo-input">
+        <input id="msg-input" type="text" placeholder="Posez votre question…"/>
+        <button onclick="sendMsg()">➤</button>
+      </div>
+    </div>
+    <div class="info-panel">
+      <div class="info-card">
+        <div class="ic-label">Ce que le bot gère</div>
+        <ul id="demo-capabilities"></ul>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">Vision SI</div>
+        <ul>
+          <li>Connecté au CRM existant via API REST</li>
+          <li>Aucune refonte de l'infrastructure actuelle</li>
+          <li>Données hébergées en Europe (RGPD)</li>
+          <li>Tableau de bord opérateur inclus</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 5 — TÉMOIGNAGE ══ -->
+<div class="slide" id="s5">
+  <div class="s-hdr">
+    <div class="bar"></div>
+    <h2 id="s5-title"></h2>
+    <div class="slide-n">05</div>
+  </div>
+  <div style="display:flex;gap:24px;padding:0 48px 32px;flex:1;align-items:stretch;">
+
+    <!-- Gauche : mockup bot Innatural Shop -->
+    <div style="flex:1.3;display:flex;flex-direction:column;gap:14px;">
+      <div style="border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.12);box-shadow:0 8px 32px rgba(0,0,0,.5);flex:1;display:flex;flex-direction:column;">
+        <!-- Tabs -->
+        <div style="background:#2D5016;padding:9px 14px;display:flex;align-items:center;gap:6px;border-bottom:1px solid rgba(255,255,255,.08);">
+          <div style="background:rgba(255,255,255,.15);color:#fff;font-size:9px;font-weight:700;padding:4px 9px;border-radius:5px;">💬 Assistant</div>
+          <div style="color:rgba(255,255,255,.35);font-size:9px;padding:4px 9px;">🛍️ Produits</div>
+          <div style="color:rgba(255,255,255,.35);font-size:9px;padding:4px 9px;">📦 Commandes</div>
+          <div style="margin-left:auto;color:rgba(255,255,255,.55);font-size:9px;font-weight:600;">FR &nbsp;|&nbsp; عر</div>
+        </div>
+        <!-- Header -->
+        <div style="background:#2D5016;padding:10px 20px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.06);">
+          <div style="color:#A8D5A2;font-size:15px;font-weight:900;font-family:'Arial Black',sans-serif;letter-spacing:-1px;">IS</div>
+          <div style="color:#fff;font-size:12px;font-weight:500;">Innatural Shop</div>
+          <div style="margin-left:auto;display:flex;gap:5px;align-items:center;">
+            <div style="width:6px;height:6px;border-radius:50%;background:#4ade80;box-shadow:0 0 5px #4ade80;"></div>
+            <span style="color:#4ade80;font-size:8px;font-weight:700;">EN LIGNE</span>
+          </div>
+        </div>
+        <!-- Chat area -->
+        <div style="background:#f7f5f0;flex:1;padding:12px;display:flex;flex-direction:column;gap:8px;overflow:hidden;">
+          <div style="background:#2D5016;border-radius:3px 10px 10px 10px;padding:9px 12px;max-width:82%;align-self:flex-start;">
+            <div style="font-size:8.5px;color:#fff;line-height:1.6;">Bonjour ! 👋 Je suis votre assistante beauté. Quel est votre type de cheveux ?</div>
+          </div>
+          <div style="background:#fff;border-radius:10px 3px 10px 10px;padding:9px 12px;max-width:72%;align-self:flex-end;border:1px solid #e0d9ce;">
+            <div style="font-size:8.5px;color:#333;line-height:1.6;">Cheveux bouclés, assez secs 🌀</div>
+          </div>
+          <div style="background:#2D5016;border-radius:3px 10px 10px 10px;padding:9px 12px;max-width:85%;align-self:flex-start;">
+            <div style="font-size:8.5px;color:#fff;line-height:1.6;">Parfait ! Je vous recommande notre gamme <strong>Curl Care</strong> 🌿<br>• Masque hydratant karité<br>• Huile de coco bio<br>• Crème coiffante légère</div>
+          </div>
+        </div>
+        <!-- Input -->
+        <div style="background:#f7f5f0;padding:8px 12px;border-top:1px solid #e0d9ce;display:flex;align-items:center;gap:8px;">
+          <div style="flex:1;background:#fff;border-radius:18px;padding:6px 12px;font-size:8.5px;color:#aaa;border:1px solid #ddd;">Posez votre question…</div>
+          <span style="font-size:14px;">🌿</span>
+        </div>
+      </div>
+      <!-- Badge -->
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:11px 14px;display:flex;align-items:center;gap:12px;">
+        <div style="font-size:18px;font-weight:900;color:#A8D5A2;font-family:'Arial Black',sans-serif;flex-shrink:0;">IS</div>
+        <div>
+          <div style="font-weight:700;color:#fff;font-size:12px;">Innatural Shop</div>
+          <div style="color:rgba(255,255,255,.4);font-size:10px;">Bot e-commerce Claude AI · Bilingue FR/AR · En production</div>
+        </div>
+        <span style="margin-left:auto;flex-shrink:0;background:rgba(0,184,124,.12);color:#10b981;border:1px solid rgba(0,184,124,.3);font-size:9px;font-weight:700;padding:3px 9px;border-radius:18px;">✅ En production</span>
+      </div>
+    </div>
+
+    <!-- Droite : réalisations + témoignage -->
+    <div style="flex:1;display:flex;flex-direction:column;gap:14px;">
+      <div style="background:#111827;border:1px solid rgba(255,255,255,.1);border-top:4px solid var(--accent);border-radius:12px;padding:18px;" id="testi-built"></div>
+      <div style="background:var(--primary);border-radius:12px;padding:20px;flex:1;display:flex;flex-direction:column;justify-content:space-between;">
+        <div>
+          <div style="font-size:9px;font-weight:800;letter-spacing:2px;color:rgba(255,255,255,.4);margin-bottom:12px;text-transform:uppercase;" id="testi-label"></div>
+          <div style="font-size:13px;color:#fff;font-weight:300;line-height:1.7;font-style:italic;margin-bottom:14px;" id="testi-quote"></div>
+          <div style="font-weight:700;color:#fff;font-size:13px;" id="testi-contact"></div>
+        </div>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.12);">
+          <div style="color:rgba(255,255,255,.6);font-size:11px;line-height:1.6;" id="testi-note"></div>
+        </div>
+      </div>
+      <div style="background:rgba(200,150,62,.08);border:1px solid rgba(200,150,62,.25);border-radius:10px;padding:11px;text-align:center;">
+        <span style="color:var(--secondary);font-size:11px;font-weight:700;" id="testi-cta"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 6 — CTA ══ -->
+<div class="slide" id="s6">
+  <div class="body">
+    <h2 id="s6-title"></h2>
+    <p class="sub" id="s6-sub"></p>
+    <div class="cta-chips" id="s6-chips"></div>
+    <div class="contact-box">
+      <div>
+        <div class="cn" id="s6-cn"></div>
+        <div class="cr" id="s6-cr"></div>
+        <div class="emails" id="s6-emails"></div>
+      </div>
+      <div class="divv"></div>
+      <div>
+        <div class="happi-brand">H'APPI</div>
+        <div class="happi-sub" id="s6-site"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /deck -->
+
+<!-- NAV -->
+<nav class="nav">
+  <button onclick="go(-1)">&#8592;</button>
+  <div class="dots" id="dots"></div>
+  <span class="count" id="cnt">1 / 5</span>
+  <button onclick="go(1)">&#8594;</button>
+</nav>
+
+<script>
+/* ── LANG TOGGLE ── */
+function toggleLang() {
+  const l = localStorage.getItem('happi_lang') || 'en';
+  localStorage.setItem('happi_lang', l === 'en' ? 'fr' : 'en');
+  location.reload();
+}
+
+/* ── BOOTSTRAP FROM CONFIG ── */
+const C = window.CONFIG;
+
+/* apply CSS vars from config colors */
+document.documentElement.style.setProperty('--primary',   C.client.colors.primary);
+document.documentElement.style.setProperty('--secondary', C.client.colors.secondary);
+document.documentElement.style.setProperty('--accent',    C.client.colors.accent);
+
+/* lang button */
+document.getElementById('lang-btn').textContent = C.ui.lang_toggle;
+
+/* slide titles */
+document.getElementById('s2-title').textContent = C.ui.s2_title;
+document.getElementById('s3-title').textContent = C.ui.s3_title;
+document.getElementById('s4-title').textContent = C.ui.s4_title;
+document.getElementById('s5-title').textContent = C.ui.s5_title;
+document.getElementById('testi-label').textContent = C.ui.s5_testi_label;
+document.getElementById('testi-cta').textContent   = C.ui.s5_cta_label;
+
+/* ── SLIDE 1 ── */
+document.getElementById('s1-tagline').textContent   = C.cover.sub;
+document.getElementById('s1-headline').innerHTML    = C.cover.headline.replace(C.client.name, `<em>${C.client.name}</em>`);
+document.getElementById('s1-initials').textContent  = C.client.initials;
+document.getElementById('s1-clname').textContent    = C.client.name;
+document.getElementById('s1-cltag').textContent     = C.client.tagline;
+document.getElementById('s1-presenter').textContent = C.cover.presenter;
+document.getElementById('s1-role').textContent      = C.cover.role;
+document.getElementById('s1-meta').innerHTML =
+  `<strong>Pour :</strong> ${C.client.name}<br>
+   <strong>Par :</strong> ${C.cover.presenter} · ${C.cover.role} · ${C.cover.date}<br>
+   <strong>Contact :</strong> ${C.cover.contact}`;
+document.getElementById('s1-fbar').innerHTML =
+  `H'APPI &nbsp;·&nbsp; ${C.client.name.toUpperCase()} &nbsp;·&nbsp; ${C.cover.date.toUpperCase()}`;
+
+const chipsEl = document.getElementById('s1-chips');
+C.cover.chips.forEach(ch => {
+  const s = document.createElement('span');
+  s.className = 'chip'; s.textContent = ch.label;
+  chipsEl.appendChild(s);
+});
+
+/* ── SLIDE 2 ── */
+const s2 = document.getElementById('s2-body');
+C.problems.forEach(pb => {
+  s2.innerHTML += `
+    <div class="pb-card">
+      <div class="ico">${pb.icon}</div>
+      <h4>${pb.title}</h4>
+      <p>${pb.desc}</p>
+    </div>`;
+});
+
+/* ── SLIDE 3 ── */
+const s3 = document.getElementById('s3-body');
+C.features.forEach(ft => {
+  const tagClass = ft.tag === 'En production' ? 'tag' : 'tag ph2';
+  s3.innerHTML += `
+    <div class="ft-card">
+      <div class="ico">${ft.icon}</div>
+      <h4>${ft.title}</h4>
+      <p>${ft.desc}</p>
+      <span class="${tagClass}">${ft.tag}</span>
+    </div>`;
+});
+
+/* ── SLIDE 4 — CHATBOT ── */
+document.getElementById('demo-name').textContent = C.chatbot.name;
+
+const capEl = document.getElementById('demo-capabilities');
+C.features.forEach(ft => {
+  capEl.innerHTML += `<li>${ft.title}</li>`;
+});
+
+const chat = document.getElementById('chat');
+const opts  = document.getElementById('opts');
+
+function addMsg(text, type) {
+  const av = type === 'bot' ? '🤖' : '👤';
+  const d = document.createElement('div');
+  d.className = `msg ${type}`;
+  d.innerHTML = `<div class="av">${av}</div><div class="bubble">${text.replace(/\n/g,'<br>')}</div>`;
+  chat.appendChild(d);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function showOpts(stepKey) {
+  opts.innerHTML = '';
+  const step = C.chatbot.steps[stepKey];
+  if (!step || !step.opts || step.opts.length === 0) return;
+  step.opts.forEach(([label, next]) => {
+    const b = document.createElement('button');
+    b.className = 'opt-btn'; b.textContent = label;
+    b.onclick = () => {
+      const s = C.chatbot.steps[next];
+      if (s && s.fan) addMsg(s.fan, 'user');
+      setTimeout(() => {
+        if (s && s.bot) addMsg(s.bot, 'bot');
+        showOpts(next);
+      }, 320);
+    };
+    opts.appendChild(b);
+  });
+}
+
+function sendMsg() {
+  const input = document.getElementById('msg-input');
+  const val = input.value.trim();
+  if (!val) return;
+  addMsg(val, 'user');
+  input.value = '';
+  setTimeout(() => {
+    addMsg("Merci pour votre message. Un conseiller H'appi prend en charge votre demande et reviendra vers vous dans les plus brefs délais.", 'bot');
+  }, 400);
+}
+
+document.getElementById('msg-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') sendMsg();
+});
+
+/* init chatbot */
+setTimeout(() => {
+  addMsg(C.chatbot.welcome, 'bot');
+  showOpts('start');
+}, 300);
+
+/* ── SLIDE 5 — TÉMOIGNAGE ── */
+if (C.testimonial && C.testimonial.show) {
+  const tb = document.getElementById('testi-built');
+  tb.innerHTML = `<div style="font-size:10px;font-weight:800;letter-spacing:2px;color:var(--accent);margin-bottom:14px;text-transform:uppercase;">Ce que H'appi a construit &amp; déployé</div>`;
+  C.testimonial.built.forEach(b => {
+    tb.innerHTML += `
+      <div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;">
+        <span style="font-size:20px;flex-shrink:0;">${b.icon}</span>
+        <div>
+          <div style="font-weight:700;color:#fff;font-size:13px;margin-bottom:3px;">${b.title}</div>
+          <div style="color:rgba(255,255,255,.5);font-size:11px;line-height:1.5;">${b.desc}</div>
+        </div>
+      </div>`;
+  });
+  document.getElementById('testi-quote').textContent   = `"${C.testimonial.quote}"`;
+  document.getElementById('testi-contact').textContent = C.testimonial.contact;
+  document.getElementById('testi-note').textContent    = C.testimonial.note;
+}
+
+/* ── SLIDE 6 — CTA ── */
+document.getElementById('s6-title').innerHTML = `Prochaine <em>étape</em>`;
+document.getElementById('s6-sub').textContent    = C.cta.subtitle;
+document.getElementById('s6-cn').textContent     = C.cta.contact.name;
+document.getElementById('s6-cr').textContent     = C.cta.contact.role;
+document.getElementById('s6-emails').innerHTML   = `${C.cta.contact.email}<br>${C.cta.contact.email2}`;
+document.getElementById('s6-site').textContent   = C.cta.contact.site;
+
+const s6chips = document.getElementById('s6-chips');
+C.cta.chips.forEach(ch => {
+  s6chips.innerHTML += `<span class="cta-chip">${ch}</span>`;
+});
+
+/* ── SLIDE ENGINE ── */
+const slides = document.querySelectorAll('.slide');
+const N = slides.length;
+let cur = 0;
+
+const dotsEl = document.getElementById('dots');
+const cntEl  = document.getElementById('cnt');
+const bar    = document.getElementById('progress-bar');
+
+for (let i = 0; i < N; i++) {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' on' : '');
+  d.onclick = () => goTo(i);
+  dotsEl.appendChild(d);
+}
+
+function updateProgress() {
+  bar.style.width = ((cur + 1) / N * 100) + '%';
+  cntEl.textContent = (cur + 1) + ' / ' + N;
+}
+
+function goTo(n) {
+  const next = (n + N) % N;
+  slides[cur].classList.remove('active');
+  dotsEl.children[cur].classList.remove('on');
+  cur = next;
+  slides[cur].classList.add('active');
+  dotsEl.children[cur].classList.add('on');
+  updateProgress();
+}
+
+function go(d) { goTo(cur + d); }
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') go(1);
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')  go(-1);
+});
+
+let tx = 0;
+document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; });
+document.addEventListener('touchend',   e => {
+  const dx = e.changedTouches[0].clientX - tx;
+  if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
+});
+
+updateProgress();
+</script>
+</body>
+</html>
