@@ -39,7 +39,7 @@ const CONFIG_EN = {
   problems: [
     {
       icon:  "🔌",
-      title: "Your ERP has the data — your clients can't access it",
+      title: "Your ERP has the data. Your clients can't access it.",
       desc:  "Order status, stock availability, delivery ETAs — all of this data already lives in your ERP. Yet B2B clients (cafés, restaurants, retail chains) have no self-service access to it. Every request goes through a human intermediary, creating unnecessary load on your teams."
     },
     {
@@ -56,7 +56,7 @@ const CONFIG_EN = {
   features: [
     {
       icon:  "🔗",
-      title: "ERP conversational layer — zero system rebuild",
+      title: "ERP conversational layer: zero system rebuild",
       desc:  "The bot connects to your existing ERP via REST API. B2B clients get real-time order status, product availability and delivery ETAs directly from your live data. No data migration, no ERP modification, no new infrastructure — just a conversational front-end on what you already have.",
       tag:   "En production"
     },
@@ -68,7 +68,7 @@ const CONFIG_EN = {
     },
     {
       icon:  "📊",
-      title: "Operations dashboard — visibility on your ERP interactions",
+      title: "Operations dashboard: visibility on your ERP interactions",
       desc:  "Aggregated view of client request types, volumes and trends by territory — data that enriches your ERP with customer-facing behavioral insight. Feed your commercial and product teams with demand signals they cannot see from the ERP alone.",
       tag:   "Phase 2"
     }
@@ -261,7 +261,7 @@ const CONFIG_FR = {
   problems: [
     {
       icon:  "🔌",
-      title: "Votre ERP a les données — vos clients ne peuvent pas y accéder",
+      title: "Votre ERP a les données. Vos clients ne peuvent pas y accéder.",
       desc:  "Statut de commande, disponibilités produits, délais de livraison — toutes ces données sont déjà dans votre ERP. Pourtant, vos clients B2B (cafés, restaurants, grandes surfaces) n'y ont aucun accès en autonomie. Chaque demande passe par un intermédiaire humain, générant une charge inutile sur vos équipes."
     },
     {
@@ -278,7 +278,7 @@ const CONFIG_FR = {
   features: [
     {
       icon:  "🔗",
-      title: "Couche conversationnelle sur votre ERP — zéro refonte",
+      title: "Couche conversationnelle sur votre ERP : zéro refonte",
       desc:  "Le bot se connecte à votre ERP existant via API REST. Vos clients B2B obtiennent le statut de commande en temps réel, les disponibilités produits et les délais de livraison directement depuis vos données live. Aucune migration, aucune modification de l'ERP, aucune nouvelle infrastructure.",
       tag:   "En production"
     },
@@ -290,7 +290,7 @@ const CONFIG_FR = {
     },
     {
       icon:  "📊",
-      title: "Dashboard opérateur — visibilité sur vos interactions ERP",
+      title: "Dashboard opérateur : visibilité sur vos interactions ERP",
       desc:  "Vue agrégée des types de demandes clients, volumes et tendances par territoire — des données qui enrichissent votre ERP avec les signaux comportementaux de la couche client. Alimentez vos équipes commerciales et R&D avec des insights qu'un ERP seul ne peut pas produire.",
       tag:   "Phase 2"
     }
