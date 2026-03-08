@@ -13,22 +13,23 @@ const CONFIG_EN = {
     colors: { primary: "#1C1C1C", secondary: "#EF3981", accent: "#FF6B9D" }
   },
   ui: {
-    s2_title:       "THE CHALLENGE YOU FACE",
-    s3_title:       "WHAT H'APPI BRINGS",
-    s4_title:       "LIVE DEMO: YOUR BOT IN ACTION",
-    s5_title:       "CLIENT REFERENCE: SAME SECTOR",
-    s5_testi_label: "Client testimonial available",
-    s5_cta_label:   "📞 Contact details available on request",
-    lang_toggle:    "🇫🇷 FR"
+    s2_title:         "THE CHALLENGE YOU FACE",
+    s3_title:         "WHAT H'APPI BRINGS",
+    s4_title:         "LIVE DEMO: YOUR BOT IN ACTION",
+    s5_title:         "CLIENT REFERENCE: SAME SECTOR",
+    s5_testi_label:   "Client testimonial available",
+    s5_cta_label:     "📞 Contact details available on request",
+    lang_toggle:      "🇫🇷 FR",
+    si_vision_label:  "ERP Integration"
   },
   cover: {
     headline:  "H'appi for Mademoiselle Desserts",
-    sub:       "Automating B2B client service and consumer discovery without changing your existing systems",
+    sub:       "A conversational layer on your ERP — B2B clients self-serve in real time, without changing your existing systems",
     chips: [
-      { label: "🤖 Smart B2B Client Bot"               },
-      { label: "🌍 Multilingual Consumer Assistant"    },
-      { label: "📊 Operations Dashboard"               },
-      { label: "🔗 Integration-ready"                  }
+      { label: "🔗 ERP conversational layer"           },
+      { label: "🤖 Smart B2B Client Bot 24/7"          },
+      { label: "🌍 Multilingual — FR · EN · NL"        },
+      { label: "📊 Operations Dashboard"               }
     ],
     presenter: "Nicolas Bayonne",
     role:      "Founder, H'appi",
@@ -37,38 +38,38 @@ const CONFIG_EN = {
   },
   problems: [
     {
-      icon:  "🤝",
-      title: "B2B clients expect instant answers",
-      desc:  "Foodservice clients — cafés, restaurants, retail chains — have recurring requests: order status, product catalog, seasonal availability, new launches. These inquiries tie up your teams on repetitive tasks across multiple territories, reducing time spent on strategic priorities."
+      icon:  "🔌",
+      title: "Your ERP has the data — your clients can't access it",
+      desc:  "Order status, stock availability, delivery ETAs — all of this data already lives in your ERP. Yet B2B clients (cafés, restaurants, retail chains) have no self-service access to it. Every request goes through a human intermediary, creating unnecessary load on your teams."
+    },
+    {
+      icon:  "⚠️",
+      title: "No conversational front-end on your existing systems",
+      desc:  "Your ERP tracks everything in real time. But there is no natural-language access layer for your B2B clients or consumers. The gap between your data infrastructure and client autonomy generates repetitive manual work — and a poor experience for partners who expect instant answers."
     },
     {
       icon:  "🌍",
-      title: "International growth needs multilingual support",
-      desc:  "With operations in France, UK and Netherlands, your customer service handles inquiries in multiple languages. Scaling this manually creates inconsistency and delays as you expand — without automation, each new market means proportionally more support headcount."
-    },
-    {
-      icon:  "🔌",
-      title: "Consumer product discovery not fully automated",
-      desc:  "Direct consumers ask about ingredients, allergens, vegan options and where to buy. Without automation, these basic inquiries consume valuable team time that could be redirected to product innovation, partnerships and strategic growth."
+      title: "Multilingual expansion without proportional support headcount",
+      desc:  "With operations in France, UK and Netherlands, client inquiries arrive in multiple languages. Scaling support manually creates inconsistency. A single API integration on your ERP removes this constraint — one bot, three markets, zero additional headcount."
     }
   ],
   features: [
     {
-      icon:  "🤖",
-      title: "Smart B2B client bot: available 24/7",
-      desc:  "Order tracking, product catalog, seasonal availability and new launch updates — available around the clock for your foodservice and retail partners across all territories. Estimated 65–75% reduction in level-1 inquiries reaching your teams.",
+      icon:  "🔗",
+      title: "ERP conversational layer — zero system rebuild",
+      desc:  "The bot connects to your existing ERP via REST API. B2B clients get real-time order status, product availability and delivery ETAs directly from your live data. No data migration, no ERP modification, no new infrastructure — just a conversational front-end on what you already have.",
       tag:   "En production"
     },
     {
-      icon:  "🌍",
-      title: "Multilingual consumer assistant",
-      desc:  "Product recommendations based on dietary preferences (vegan, allergen-free), ingredient information, store locator, brand storytelling — available in English, French and Dutch. One deployment for all your markets, consistent experience everywhere.",
+      icon:  "🤖",
+      title: "B2B & consumer bot: available 24/7 in 3 languages",
+      desc:  "Order tracking, product catalog, allergen info, stockist finder, partnership qualification — available in English, French and Dutch around the clock. One deployment covers all your markets. Estimated 65–75% reduction in level-1 inquiries reaching your teams.",
       tag:   "En production"
     },
     {
       icon:  "📊",
-      title: "Operations dashboard & market insights",
-      desc:  "Unified view of client requests, product inquiries and consumer trends across all territories. Data that feeds directly into your commercial and product development teams to anticipate demand and accelerate decisions.",
+      title: "Operations dashboard — visibility on your ERP interactions",
+      desc:  "Aggregated view of client request types, volumes and trends by territory — data that enriches your ERP with customer-facing behavioral insight. Feed your commercial and product teams with demand signals they cannot see from the ERP alone.",
       tag:   "Phase 2"
     }
   ],
@@ -184,7 +185,14 @@ const CONFIG_EN = {
         bot: "We're actively expanding our international footprint. Our export team would love to discuss your market and how we can support your distribution. I'm forwarding your details right now — expect contact within 24 hours.",
         opts: [["← Back", "start"]]
       }
-    }
+    },
+    si_vision: [
+      "Connected to your existing ERP via REST API",
+      "Real-time data — no duplication, no manual sync",
+      "No ERP modification required",
+      "GDPR-compliant, hosted in Europe",
+      "Operator dashboard included"
+    ]
   },
   testimonial: {
     show: true,
@@ -199,10 +207,10 @@ const CONFIG_EN = {
   },
   cta: {
     title:    "Next step",
-    subtitle: "30 minutes for a personalised demo on your B2B client and consumer use cases",
+    subtitle: "30 minutes to show you the ERP integration live — on your own data, with your own order flow",
     chips: [
-      "📅 Demo on your real data",
-      "🔗 API integration to your e-commerce/CRM",
+      "📅 Live ERP integration demo",
+      "🔗 REST API on your existing system",
       "📋 Client reference available",
       "🚀 Go-live in 4 weeks"
     ],
@@ -227,22 +235,23 @@ const CONFIG_FR = {
     colors: { primary: "#1C1C1C", secondary: "#EF3981", accent: "#FF6B9D" }
   },
   ui: {
-    s2_title:       "LE DÉFI QUE VOUS RENCONTREZ",
-    s3_title:       "CE QUE H'APPI APPORTE",
-    s4_title:       "DÉMO LIVE : VOTRE BOT EN ACTION",
-    s5_title:       "RÉFÉRENCE CLIENT : MÊME SECTEUR",
-    s5_testi_label: "Témoignage client disponible",
-    s5_cta_label:   "📞 Coordonnées disponibles sur demande",
-    lang_toggle:    "🇬🇧 EN"
+    s2_title:         "LE DÉFI QUE VOUS RENCONTREZ",
+    s3_title:         "CE QUE H'APPI APPORTE",
+    s4_title:         "DÉMO LIVE : VOTRE BOT EN ACTION",
+    s5_title:         "RÉFÉRENCE CLIENT : MÊME SECTEUR",
+    s5_testi_label:   "Témoignage client disponible",
+    s5_cta_label:     "📞 Coordonnées disponibles sur demande",
+    lang_toggle:      "🇬🇧 EN",
+    si_vision_label:  "Intégration ERP"
   },
   cover: {
     headline:  "H'appi pour Mademoiselle Desserts",
-    sub:       "Automatiser le service client B2B et la découverte produit sans toucher à votre SI existant",
+    sub:       "Une couche conversationnelle sur votre ERP — vos clients B2B s'auto-servent en temps réel, sans toucher à vos systèmes existants",
     chips: [
-      { label: "🤖 Bot clients B2B intelligent"        },
-      { label: "🌍 Assistant consommateurs multilingue" },
-      { label: "📊 Dashboard opérateur"                },
-      { label: "🔗 Intégration e-commerce/CRM"         }
+      { label: "🔗 Couche conversationnelle ERP"       },
+      { label: "🤖 Bot clients B2B 24h/24"             },
+      { label: "🌍 Multilingue — FR · EN · NL"         },
+      { label: "📊 Dashboard opérateur"                }
     ],
     presenter: "Nicolas Bayonne",
     role:      "Fondateur H'appi",
@@ -251,38 +260,38 @@ const CONFIG_FR = {
   },
   problems: [
     {
-      icon:  "🤝",
-      title: "Clients B2B qui attendent des réponses immédiates",
-      desc:  "Les clients foodservice (cafés, restaurants, grandes surfaces) ont des demandes récurrentes : suivi de commande, catalogue produits, disponibilités saisonnières. Ces sollicitations mobilisent vos équipes sur des tâches répétitives sur plusieurs territoires."
+      icon:  "🔌",
+      title: "Votre ERP a les données — vos clients ne peuvent pas y accéder",
+      desc:  "Statut de commande, disponibilités produits, délais de livraison — toutes ces données sont déjà dans votre ERP. Pourtant, vos clients B2B (cafés, restaurants, grandes surfaces) n'y ont aucun accès en autonomie. Chaque demande passe par un intermédiaire humain, générant une charge inutile sur vos équipes."
+    },
+    {
+      icon:  "⚠️",
+      title: "Aucune interface conversationnelle sur vos systèmes existants",
+      desc:  "Votre ERP centralise tout en temps réel. Mais il n'existe pas de couche d'accès en langage naturel pour vos clients B2B ou vos consommateurs. L'écart entre votre infrastructure de données et l'autonomie client génère du travail manuel répétitif — et une expérience partenaire en dessous de vos ambitions."
     },
     {
       icon:  "🌍",
-      title: "Expansion internationale sans support multilingue scalable",
-      desc:  "Avec des opérations en France, au Royaume-Uni et aux Pays-Bas, votre service client traite des demandes en plusieurs langues. Scaler cela manuellement crée des incohérences et des délais à mesure que vous vous développez."
-    },
-    {
-      icon:  "🔌",
-      title: "Découverte produit consommateur non automatisée",
-      desc:  "Les consommateurs posent des questions sur les ingrédients, les allergènes, les options vegan et les points de vente. Sans automatisation, ces demandes basiques consomment un temps précieux qui pourrait être consacré à l'innovation produit."
+      title: "Expansion multilingue sans masse salariale proportionnelle",
+      desc:  "Avec des opérations en France, au Royaume-Uni et aux Pays-Bas, les demandes arrivent en plusieurs langues. Scaler le support manuellement crée des incohérences. Une seule intégration API sur votre ERP supprime cette contrainte — un bot, trois marchés, zéro effectif supplémentaire."
     }
   ],
   features: [
     {
-      icon:  "🤖",
-      title: "Bot clients B2B : disponible 24h/24",
-      desc:  "Suivi de commande, catalogue produits, disponibilités saisonnières et nouveaux lancements — disponible en continu pour vos partenaires foodservice et retail sur tous vos territoires. Réduction estimée de 65–75% des sollicitations de niveau 1.",
+      icon:  "🔗",
+      title: "Couche conversationnelle sur votre ERP — zéro refonte",
+      desc:  "Le bot se connecte à votre ERP existant via API REST. Vos clients B2B obtiennent le statut de commande en temps réel, les disponibilités produits et les délais de livraison directement depuis vos données live. Aucune migration, aucune modification de l'ERP, aucune nouvelle infrastructure.",
       tag:   "En production"
     },
     {
-      icon:  "🌍",
-      title: "Assistant consommateurs multilingue",
-      desc:  "Recommandations produits selon les préférences alimentaires (vegan, sans allergènes), informations ingrédients, localisateur de points de vente, storytelling de marque — disponible en français, anglais et néerlandais. Un seul déploiement pour tous vos marchés.",
+      icon:  "🤖",
+      title: "Bot B2B & consommateurs : 24h/24 en 3 langues",
+      desc:  "Suivi de commande, catalogue produits, allergènes, localisateur de points de vente, qualification partenariat — disponible en français, anglais et néerlandais en continu. Un seul déploiement couvre tous vos marchés. Réduction estimée de 65–75% des sollicitations de niveau 1.",
       tag:   "En production"
     },
     {
       icon:  "📊",
-      title: "Dashboard opérateur & insights marché",
-      desc:  "Vue unifiée des demandes clients, questions produits et tendances consommateurs sur tous les territoires. Des données qui alimentent directement vos équipes commerciales et R&D pour anticiper la demande.",
+      title: "Dashboard opérateur — visibilité sur vos interactions ERP",
+      desc:  "Vue agrégée des types de demandes clients, volumes et tendances par territoire — des données qui enrichissent votre ERP avec les signaux comportementaux de la couche client. Alimentez vos équipes commerciales et R&D avec des insights qu'un ERP seul ne peut pas produire.",
       tag:   "Phase 2"
     }
   ],
@@ -398,7 +407,14 @@ const CONFIG_FR = {
         bot: "Nous développons activement notre présence internationale. Notre équipe export serait ravie d'échanger sur votre marché et les modalités de distribution. Je transmets votre demande maintenant — contact sous 24h.",
         opts: [["← Retour", "start"]]
       }
-    }
+    },
+    si_vision: [
+      "Connecté à votre ERP existant via API REST",
+      "Données temps réel — aucune duplication, aucune synchro manuelle",
+      "Aucune modification de l'ERP requise",
+      "Données hébergées en Europe (RGPD)",
+      "Tableau de bord opérateur inclus"
+    ]
   },
   testimonial: {
     show: true,
@@ -413,10 +429,10 @@ const CONFIG_FR = {
   },
   cta: {
     title:    "Prochaine étape",
-    subtitle: "30 minutes pour une démo personnalisée sur vos cas d'usage B2B et consommateurs",
+    subtitle: "30 minutes pour vous montrer l'intégration ERP en live — sur vos données, avec votre flux de commandes",
     chips: [
-      "📅 Démo sur vos données réelles",
-      "🔗 Intégration API votre e-commerce/CRM",
+      "📅 Démo intégration ERP en live",
+      "🔗 API REST sur votre système existant",
       "📋 Référence client disponible",
       "🚀 Déploiement en 4 semaines"
     ],
